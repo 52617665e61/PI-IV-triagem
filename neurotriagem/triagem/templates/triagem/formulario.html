@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Triagem TDAH</title>
+</head>
+<body>
+    <h1>Triagem para TDAH</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if resultado %}
+        <h2>Resultado da triagem:</h2>
+        <p>Classe prevista: {{ resultado.classe }}</p>
+        <p>Probabilidade: {{ resultado.probabilidade|floatformat:2 }}</p>
+        {% if resultado.classe == 1 %}
+            <p>Recomendação: Procure um profissional de saúde para avaliação completa.</p>
+        {% else %}
+            <p>Recomendação: Os sinais de TDAH não foram identificados neste teste.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
