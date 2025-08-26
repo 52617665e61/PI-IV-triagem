@@ -1,0 +1,37 @@
+
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<h2>Dashboard do Modelo</h2>
+
+<h3>Importância das Questões (Features)</h3>
+<img src="{% static 'analytics/importancia_features.png' %}" class="img-fluid" />
+
+<h3>Matriz de Confusão</h3>
+<img src="{% static 'analytics/matriz_confusao.png' %}" class="img-fluid" />
+
+<h3>Relatório de Classificação</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Classe</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1-score</th>
+      <th>Support</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for label, row in relatorio.iterrows %}
+    <tr>
+      <td>{{ label }}</td>
+      <td>{{ row.precision|floatformat:2 }}</td>
+      <td>{{ row.recall|floatformat:2 }}</td>
+      <td>{{ row|get_item:"f1-score"|floatformat:2 }}</td>
+      <td>{{ row.support }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -2,19 +2,25 @@ import joblib
 import numpy as np
 import os
 
-# Caminho absoluto ao arquivo .pkl
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-MODEL_PATH = os.path.join(BASE_DIR, 'modelo_tdha.pkl')
 
+# Path do modelo treinado
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+MODEL_PATH = os.path.join(BASE_DIR, 'ml', 'modelo_tdah.pkl')
+
+# Loading model 
 model = joblib.load(MODEL_PATH)
 
 def prever_triagem(dados_dict):
-    """
-    Recebe um dicionário com os campos tr1 a tr43 e retorna classe e probabilidade.
-    """
     dados = []
+
+    dados.append(int(dados_dict['gender']))
+    dados.append(int(dados_dict['age']))
+    dados.append(int(dados_dict['nsc']))
     for i in range(1, 44):
         key = f'tr{i}'
+        dados.append(int(dados_dict[key]))
+    for i in range(1, 27):
+        key = f'demo{i}'
         dados.append(int(dados_dict[key]))
     
     dados_np = np.array(dados).reshape(1, -1)

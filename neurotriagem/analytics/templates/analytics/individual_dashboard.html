@@ -1,0 +1,14 @@
+{% load static %}
+
+{% block content %}
+<h2>Dashboard Individual - Teste {{ teste_id }}</h2>
+
+<h3>Respostas Individuais</h3>
+<img src="{% static resp_individual %}" alt="Respostas Individuais">
+
+<h3>Frequência das Respostas</h3>
+<img src="{% static frequencia_respostas %}" alt="Frequência de Respostas">
+
+<h3>Mapa de Calor</h3>
+<img src="{% static mapa_calor %}" alt="Mapa de Calor">
+{% endblock %}

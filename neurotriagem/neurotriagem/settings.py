@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     #APPS CRIADOS NO DESENVOLVIMENTO
 
-    'triagem'
+    'triagem',
+    'analytics',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'neurotriagem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

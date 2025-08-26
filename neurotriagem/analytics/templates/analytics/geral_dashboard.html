@@ -1,0 +1,11 @@
+{% load static %}
+
+{% block content %}
+<h2>Dashboard Geral dos Testes</h2>
+
+<h3>Distribuição de Idade dos Participantes</h3>
+<img src="{% static 'analytics/hist_idade.png' %}" class="img-fluid" />
+
+<h3>Idade Média por Gênero</h3>
+<img src="{% static 'analytics/media_idade_genero.png' %}" class="img-fluid" />
+{% endblock %}
