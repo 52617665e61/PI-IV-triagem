@@ -17,3 +17,10 @@ document.addEventListener('click', function(e) {
     }
 });
 
+function handleLogout() {
+    const logoutForm = document.getElementById('logout-form');
+    if (logoutForm) {
+        logoutForm.submit();
+    }
+}
+

@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Jacques+Francois&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    <!-- NAVBAR COM FUNDO -->
+    <div>
+        <nav class="head">
+            <!-- Ícone Home -->
+            <a href="/" class="nav-icon-left">
+                <img src="{% static 'img/home-icon.png' %}" alt="Home">
+            </a>
+
+            {% if not user.is_authenticated %}
+            <div class="navbar-left">
+                <a href="/" class="nav-link">Página Inicial</a>
+                <a href="#" class="nav-link">Serviços</a>
+                <a href="#" class="nav-link">Quem Somos</a>
+            </div>
+            <div class="navbar-right">
+                <a href="{% url 'registro' %}" class="register-btn">Registrar-se</a>
+                <a href="{% url 'login' %}" class="login-btn">Login</a>
+            </div>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <div class="dropdown">
+                <button class="nav-btn" onclick="toggleDropdown(this)">Página Inicial <span class="arrow"></span></button>
+                <div class="dropdown-content">
+                    <a href="#">Subitem 1</a>
+                    <a href="#">Subitem 2</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="nav-btn" onclick="toggleDropdown(this)">Testes <span class="arrow"></span></button>
+                <div class="dropdown-content">
+                    <a href="#">TDAH</a>
+                    <a href="#">Ansiedade</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="nav-btn" onclick="toggleDropdown(this)">Resultados <span class="arrow"></span></button>
+                <div class="dropdown-content">
+                    <a href="#">Últimos</a>
+                    <a href="#">Todos</a>
+                </div>
+            </div>
+
+            <div class="dropdown nav-icon-right">
+                <img src="{% static 'img/user-icon.png' %}" alt="Usuário" class="user-avatar" onclick="toggleDropdown(this)">
+                <div class="dropdown-content user-menu">
+                    <a href="#">Perfil</a>
+                    <a href="#">Configurações</a>
+                    <a href="#" onclick="handleLogout(); return false;">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+        </nav>
+    </div> <!-- fecha background da NAV -->
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FORMULÁRIO INVISÍVEL PARA LOGOUT -->
+    <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+        {% csrf_token %}
+    </form>
+
+    <!-- JS global (ex: dropdown) -->
+    <script src="{% static 'js/dropdown.js' %}" defer></script>
+
+    <!-- JS específico da página filha -->
+    <main>
+    {% block js %}{% endblock %}
+    </main>
+</body>
+</html>
