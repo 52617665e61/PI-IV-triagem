@@ -6,6 +6,9 @@ import numpy as np
 import os
 from .loading_ml.tdah_prediction import prever_triagem
 
+def index(request):
+    return render(request, 'index.html')
+
 def triagem_view(request):
     resultado = None
 

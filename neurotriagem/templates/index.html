@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu com Dropdown</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Jacques+Francois&display=swap" rel="stylesheet">
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    
+</head>
+<body>
+    <div class="background">
+        <nav class="head">
+        <!-- Ícone circular à esquerda (voltar para home) -->
+        <a href="/" class="nav-icon-left">
+            <img src="{% static 'img/home-icon.png' %}" alt="Home">
+        </a>
+
+        <!-- Botões com as funcionalidades disponiveis para usuários não autenticasdos-->
+        {% if not user.is_authenticated %}
+        <div class="navbar-left">
+            <a href="/" class="nav-link">Página Inicial</a>
+            <a href="" class="nav-link">Serviços</a>
+            <a href="" class="nav-link">Quem Somos</a>
+        </div>
+        <div class="navbar-right">
+            <a href="" class="register-btn">Registrar-se</a>
+            <a href="" class="login-btn">Login</a>
+        </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <!-- Botões com as funcionalidades do usuário autenticado -->
+        <div class="dropdown">
+            <button class="nav-btn" onclick="toggleDropdown(this)">
+                Página Inicial <span class="arrow"></span>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Subitem 1</a>
+                <a href="#">Subitem 2</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="nav-btn" onclick="toggleDropdown(this)">
+                Testes <span class="arrow"></span>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">TDAH</a>
+                <a href="#">Ansiedade</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="nav-btn" onclick="toggleDropdown(this)">
+                Resultados <span class="arrow"></span>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Últimos</a>
+                <a href="#">Todos</a>
+            </div>
+        </div>
+
+        <!-- Ícone circular à direita (foto do usuário com dropdown) -->
+        <div class="dropdown nav-icon-right">
+            <img src="{% static 'img/user-icon.png' %}" alt="Usuário" class="user-avatar" onclick="toggleDropdown(this)">
+            <div class="dropdown-content user-menu">
+                <a href="#">Perfil</a>
+                <a href="#">Configurações</a>
+                <a href="">Logout</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</nav>
+
+</body>
+</html>

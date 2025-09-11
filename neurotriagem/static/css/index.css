@@ -1,0 +1,197 @@
+/* Reseta configurações padrões dos navegadores */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #5458b4; /* cor de fundo base */
+}
+
+.backgroung {
+    background-color: #5458b4;
+    min-height: 100vh; /* 100% da altura da tela */
+    width: 100%;
+    padding: 0;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0a0345;
+    padding: 10px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.nav-icon-left img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Botões */
+
+.nav-btn {
+  background-color: #d1cfcf;
+  height: auto; 
+  min-height: 15px; 
+  width: auto; 
+  min-width: 50px; 
+  max-width: 100%; 
+  border: 3px solid #ffffff;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  position: relative;
+  font-size: 15px;
+  font-family: 'Jacques Francois', serif;
+  color: #000;
+  padding: 10px 20px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-btn .arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #000;
+  margin-left: 10px;
+}
+
+.nav-link {
+  font-family: 'Jacques Francois', serif;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Linha embaixo ao passar o mouse */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+/* Efeito hover: linha cresce e centraliza */
+.nav-link:hover::after {
+  width: 80%;
+  left: 10%;
+}
+
+.nav-link:hover {
+  color: #d1cfcf;
+}
+
+.register-btn {
+  background-color: #3a8a3c; 
+  color: white;
+  align-items: flex-end;
+  font-family: 'Jacques Francois', serif;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.register-btn:hover {
+  background-color: #60e767;
+}
+
+.login-btn {
+  background-color: #a06c0c;
+  color:white;
+  font-family: 'Jacques Francois', serif;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.login-btn:hover {
+  background-color: #eb9c0a;
+}
+
+/* Garante que dropdowns fiquem organizados horizontalmente */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Oculta o menu suspenso por padrão */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #d1cfcf; 
+  min-width: 100%;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  font-family: 'Jacques Francois', serif;
+  font-size: 15px;
+  color: #000;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  border-top: 1px solid #fff;
+  background-color: #d1cfcf;
+  transition: background-color 0.2s ease; /* suave */
+}
+
+/* Estilo quando passa o mouse */
+.dropdown-content a:hover {
+  background-color: #c0c0c0; 
+  color: #000;
+}
+
+.dropdown-content a:hover {
+  background-color: #c0c0c0;
+}
+
+.dropdown.show .dropdown-content {
+  display: block;
+}
+
+/* Icone de usuário */
+.nav-icon-right {
+    position: relative;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.user-menu {
+    right: 0;
+    left: auto;
+}

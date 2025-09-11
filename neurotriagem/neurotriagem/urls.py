@@ -4,7 +4,7 @@ from triagem import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.triagem_view, name='triagem_tdh'),
+    path('', views.index, name='index'),  
+    path('triagem/', views.triagem_view, name='triagem_tdh'),  # movemos a view para outra rota
     path('dashboards/', include('analytics.urls')),
-
 ]
