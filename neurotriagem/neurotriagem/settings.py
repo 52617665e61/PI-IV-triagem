@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     #APPS CRIADOS NO DESENVOLVIMENTO
 
+    'pages',
     'triagem',
     'analytics',
     'user',
