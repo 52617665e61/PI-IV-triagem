@@ -8,3 +8,4 @@ def lista_de_servicos(request):
 
 def quem_somos(request):
     return render(request, 'pages/quem_somos.html')
+

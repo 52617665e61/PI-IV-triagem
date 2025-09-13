@@ -1,10 +1,9 @@
 from django.urls import path
-from analytics import views
+from . import views
 
-app_name = 'analytics'  
+app_name = 'analytics'
 
 urlpatterns = [
-    path('modelo/', views.dashboard_modelo, name='dashboard_modelo'),
-    path('geral/', views.dashboard_geral, name='dashboard_geral'),
-    path('individual/<int:teste_id>/', views.dashboard_individual, name='dashboard_individual'),
+    path('', views.dashboard_view, name='visao_geral'),
+    path('paciente/<int:paciente_id>/', views.paciente_detail_view, name='paciente_detail'),
 ]

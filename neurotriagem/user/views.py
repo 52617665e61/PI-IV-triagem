@@ -6,15 +6,11 @@ from django.urls import reverse_lazy
 from .forms import  RegistroUsuarioNormalForm, RegistroUsuarioPsicologoForm, RegistroUsuarioAdminForm
 from .models import PsicologoUser, AdminUser, NormalUser
 
-# views.py
-
 def registro_escolha_view(request):
-    # Página inicial com os dois cards
     return render(request, 'user/registro_escolha.html')
 
 
 def register_view(request, tipo):
-    # Recebe o tipo pela URL
     form_class_map = {
         'normal': RegistroUsuarioNormalForm,
         'psicologo': RegistroUsuarioPsicologoForm,
@@ -51,7 +47,7 @@ class CustomLoginView(LoginView):
         real_user = self.request.user.get_real_instance()
 
         if isinstance(real_user, PsicologoUser):
-            return reverse_lazy('index')
+            return reverse_lazy('analytics:visao_geral')
         elif isinstance(real_user, AdminUser):
             return reverse_lazy('index')
         elif isinstance(real_user, NormalUser):

@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.contrib.auth.models import Group
 
 
-# Gerenciador de contas personalizado
 class CustomAccountManager(BaseUserManager):
     def create_superuser(self, email, user_name, first_name, last_name, password, **other_fields):
         other_fields.setdefault('is_staff', True)
@@ -30,8 +29,6 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
 
-
-# Modelo base de usuário (usado para autenticação)
 class NewUser(AbstractBaseUser, PermissionsMixin):
     id = models.BigAutoField(primary_key=True)
     email = models.EmailField(_('Endereço de email'), unique=True)
@@ -53,7 +50,6 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        # (Opcional) Adicionar a um grupo padrão com base no tipo real
         real_instance = getattr(self, 'get_real_instance', lambda: None)()
         if real_instance:
             group_name = type(real_instance).__name__.replace('User', '').lower()
