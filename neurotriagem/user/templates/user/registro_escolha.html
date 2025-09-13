@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Escolha de tipo de usuário{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/registro_escolha.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Escolha seu tipo de conta</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <a href="{% url 'registro' 'normal' %}" class="card-link">
+                <div class="card text-center p-4" data-tipo="normal">
+                    <h4>Sou Paciente</h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'registro' 'psicologo' %}" class="card-link">
+                <div class="card text-center p-4" data-tipo="psicologo">
+                    <h4>Sou Psicólogo/Psiquiatra</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

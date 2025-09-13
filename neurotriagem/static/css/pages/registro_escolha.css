@@ -1,0 +1,70 @@
+.container {
+  background-color: #ffffff;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 800px;
+  margin: 5% auto;
+}
+
+h1.mb-4 {
+  text-align: center;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* para o link ocupar toda a largura do card */
+  height: 100%;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  color: #0c0a0a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 150px;
+}
+
+.card[data-tipo="normal"] {
+  background-color: #c4c25d;
+}
+
+.card[data-tipo="psicologo"] {
+  background-color: #8b096f;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.row.mb-4 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col-md-6 {
+  flex: 0 0 48%;
+}
+
+@media (max-width: 768px) {
+  .row.mb-4 {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .col-md-6 {
+    width: 100%;
+  }
+}
