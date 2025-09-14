@@ -35,6 +35,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     user_name = models.CharField(_('Usuário'), max_length=150, unique=True)
     first_name = models.CharField(_('Primeiro nome'), max_length=150)
     last_name = models.CharField(_('Sobrenome'), max_length=150)
+    gender = models.CharField(max_length=1, choices=[('1', 'Masculino'), ('0', 'Feminino')], )
     data_registro = models.DateTimeField(_('Data de registro'), default=timezone.now)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -42,7 +43,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'user_name'
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'gender', 'gender']
 
     def __str__(self):
         return self.user_name
@@ -66,12 +67,14 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
         return self
 
 class NormalUser(NewUser):
-    data_nascimento = models.DateField(_('Data de nascimento'))
+    born = models.DateField(_('Data de nascimento'))
     telefone = models.CharField(_('Telefone'), max_length=20, blank=True, null=True)
 
     class Meta:
         verbose_name = "Usuário Normal"
         verbose_name_plural = "Usuários Normais"
+    
+    REQUIRED_FIELDS = ['born']
 
 
 class PsicologoUser(NewUser):

@@ -1,5 +1,5 @@
-.container-box {
-    background-color: white;
+.container {
+    background-color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -10,4 +10,31 @@
     margin: 60px auto;
     display: flex;
     flex-direction: column;
+
+    overflow: hidden; /* evita margin collapsing */
+}
+
+.card-summary {
+    flex: 1;
+    margin: 0.5rem;
+}
+
+.card-summary .card-body {
+    display: flex;
+    align-items: center;
+}
+
+.card-summary i {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+}
+
+.card-summary .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.card-summary .card-number {
+    font-size: 2rem;
+    font-weight: bold;
 }

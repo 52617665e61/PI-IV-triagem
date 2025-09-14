@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import NormalUser, PsicologoUser, AdminUser
+from django.forms.widgets import SelectDateWidget
+from datetime import datetime
 
 
 class RegistroUsuarioNormalForm(UserCreationForm):
@@ -11,11 +13,19 @@ class RegistroUsuarioNormalForm(UserCreationForm):
             'user_name',
             'first_name',
             'last_name',
-            'data_nascimento',
+            'gender',
+            'born',
             'telefone',
             'password1',
             'password2',
         ]
+
+        widgets = {
+            'born': SelectDateWidget(
+                 years=range(datetime.now().year, 1900, -1),
+                  empty_label=("Dia", "Mês", "Ano"),
+            )
+        }
 
     def save(self, commit=True):
         user = super().save(commit=False)

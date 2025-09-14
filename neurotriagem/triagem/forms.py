@@ -5,4 +5,5 @@ class TriagemForm(forms.ModelForm):
     class Meta:
         model = Triagem
         fields = '__all__'
-        exclude = ['resultado_triagem', 'data_envio']
+        exclude = ['usuario', 'teste', 'age', 'gender', 'resultado_ml', 'probabilidades_ml',
+                   'data_envio', 'psicologo_revisor', 'revisado', 'comentario_revisor', 'data_revisao']

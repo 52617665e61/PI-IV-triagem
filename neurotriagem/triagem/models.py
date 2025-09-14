@@ -1,9 +1,18 @@
 from django.db import models
 
-class Triagem(models.Model):
+class Teste(models.Model):
     nome = models.CharField(max_length=100)
-    age = models.PositiveIntegerField()
-    gender = models.CharField(max_length=10)
+    descricao = models.TextField(blank=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nome
+
+class Triagem(models.Model):
+    usuario = models.ForeignKey('user.NormalUser', on_delete=models.CASCADE, related_name='triagens')
+    teste = models.ForeignKey('Teste', on_delete=models.CASCADE, related_name='respostas')
+    age = models.PositiveIntegerField(null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=[('1', 'Masculino'), ('0', 'Feminino')])
     nsc = models.PositiveIntegerField()  # Nível socioeconômico?
     tr1 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     tr2 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
@@ -74,8 +83,15 @@ class Triagem(models.Model):
     demo24 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     demo25 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     demo26 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    resultado_triagem = models.CharField(max_length=100, blank=True, null=True)
+    resultado_ml = models.TextField(blank=True, null=True)
+    probabilidades_ml = models.JSONField(blank=True, null=True)
     data_envio = models.DateTimeField(auto_now_add=True)
+    psicologo_revisor = models.ForeignKey(
+        'user.PsicologoUser', on_delete=models.SET_NULL, null=True, blank=True, related_name='triagens_corrigidas'
+    )
+    revisado = models.BooleanField(default=False)
+    comentario_revisor = models.TextField(blank=True, null=True)
+    data_revisao = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.nome} - {self.age} anos"
