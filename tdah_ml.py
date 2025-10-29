@@ -19,8 +19,7 @@ def preprocessar_dados(df):
     """
     Faz pré-processamento: tratamento de nulos e balanceamento de classes.
     """
-    tr_cols = ['gender', 'age', 'nsc'] + [f"tr{i}" for i in range(1, 44)] + [f"demo{i}" for i in range(1, 27)]
-    
+    tr_cols = ['gender', 'age'] + [f"tr{i}" for i in range(1, 44)]
     # Remove linhas com valores nulos nas colunas essenciais
     df = df.dropna(subset=tr_cols + ['group'])
 

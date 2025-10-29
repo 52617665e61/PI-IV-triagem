@@ -13,7 +13,6 @@ class Triagem(models.Model):
     teste = models.ForeignKey('Teste', on_delete=models.CASCADE, related_name='respostas')
     age = models.PositiveIntegerField(null=True, blank=True)
     gender = models.CharField(max_length=1, choices=[('1', 'Masculino'), ('0', 'Feminino')])
-    nsc = models.PositiveIntegerField()  # Nível socioeconômico?
     tr1 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     tr2 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     tr3 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
@@ -57,32 +56,7 @@ class Triagem(models.Model):
     tr41 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     tr42 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
     tr43 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo1 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo2 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo3 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo4 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo5 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo6 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo7 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo8 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo9 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo10 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo11 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo12 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo13 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo14 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo15 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo16 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo17 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo18 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo19 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo20 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo21 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo22 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo23 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo24 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo25 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
-    demo26 = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
+    
     resultado_ml = models.TextField(blank=True, null=True)
     probabilidades_ml = models.JSONField(blank=True, null=True)
     data_envio = models.DateTimeField(auto_now_add=True)
@@ -94,4 +68,4 @@ class Triagem(models.Model):
     data_revisao = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.nome} - {self.age} anos"
+        return f"{self.usuario} - {self.age} anos"

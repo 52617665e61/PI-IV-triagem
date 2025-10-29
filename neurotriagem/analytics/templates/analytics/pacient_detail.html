@@ -1,6 +1,75 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalhes do Paciente{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-    <h1>Detalhes do Paciente #{{ paciente_id }}</h1>
+<div class="backgroung">
+  <div class="container" style="padding: 40px; color: #fff;">
+    <h2 style="text-align: center; font-family: 'Jacques Francois', serif;">
+      {{ user.first_name }} {{ user.last_name }}
+    </h2>
+
+    <div style="background-color: #d1cfcf; color: #000; padding: 20px; border-radius: 10px; max-width: 600px; margin: 30px auto;">
+      <p><strong>ID:</strong> {{ user.id }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Data de Nascimento:</strong> {{ user.born }}</p>
+      <p><strong>Telefone:</strong> {{ user.telefone }}</p>
+      <p><strong>Gênero:</strong> {{ user.get_gender_display }}</p>
+    </div>
+
+    <h3 style="text-align: center; font-family: 'Jacques Francois', serif;">Testes Realizados</h3>
+
+    {% if tests %}
+    <table style="width: 100%; border-collapse: collapse; background-color: #d1cfcf; color: #000; border-radius: 10px; overflow: hidden; margin-top: 20px;">
+      <thead style="background-color: #0a0345; color: #fff;">
+        <tr>
+          <th style="padding: 10px;">Teste</th>
+          <th style="padding: 10px;">Data de Envio</th>
+          <th style="padding: 10px;">Revisado</th>
+          <th style="padding: 10px;">Data de Revisão</th>
+          <th style="padding: 10px; text-align:center;">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in tests %}
+        <tr style="border-bottom: 1px solid #aaa;">
+          <td style="padding: 10px;">{{ t.teste.nome }}</td>
+          <td style="padding: 10px;">{{ t.data_envio|date:"d/m/Y H:i" }}</td>
+          <td style="padding: 10px;">
+            {% if t.revisado %}
+              ✅ Corrigido
+            {% else %}
+              ⏳ Aguardando
+            {% endif %}
+          </td>
+          <td style="padding: 10px;">
+            {% if t.data_revisao %}
+              {{ t.data_revisao|date:"d/m/Y H:i" }}
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td style="padding: 10px; text-align:center;">
+            <a href="{% url 'analytics:triagem_detail' t.id %}" 
+               class="nav-btn"
+               style="background-color: #3a8a3c; color: white; text-decoration: none; font-size: 14px;">
+              Ver Teste
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p style="text-align: center;">Nenhum teste realizado ainda.</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="{% url 'analytics:pacients_list' %}" class="nav-btn" style="background-color: #a06c0c; color: white; text-decoration: none;">
+        Voltar à lista
+      </a>
+    </div>
+  </div>
 </div>
 {% endblock %}

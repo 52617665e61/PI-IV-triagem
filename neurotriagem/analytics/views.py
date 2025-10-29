@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from datetime import timedelta
 from django.utils import timezone
 from django.db.models import Count, Avg
@@ -6,14 +7,13 @@ from user.models import NormalUser
 from triagem.models import Triagem
 import pandas as pd
 import plotly.express as px
-
-
 from django.shortcuts import render
 from django.utils import timezone
 from datetime import timedelta
 from django.db.models import Count, Avg
 from user.models import NormalUser
 from triagem.models import Triagem
+from triagem.forms import TriagemForm
 import plotly.express as px
 import pandas as pd
 
@@ -74,6 +74,48 @@ def dashboard_view(request):
 
     return render(request, "analytics/visao_geral.html", context)
 
+def pacients_list(request):
+    pacients = NormalUser.objects.all().order_by('id')
+    context = {'pacients': pacients}
+    return render(request, 'analytics/pacient_list.html', context)
 
-def paciente_detail_view(request, paciente_id):
-    return render(request, 'analytics/pacient_detail.html', {'paciente_id': paciente_id})
+
+def paciente_detail_view(request, id):
+    user = get_object_or_404(NormalUser, id=id)
+    tests = Triagem.objects.filter(usuario=user).select_related('teste').order_by('-data_envio')
+
+    context = {
+        'user': user,
+        'tests': tests
+    }
+    return render(request, 'analytics/pacient_detail.html', context)
+
+@login_required
+def triagem_detail_view(request, id):
+    triagem = get_object_or_404(Triagem, id=id)
+    form = TriagemForm(instance=triagem)
+
+    respostas = [(field.label, getattr(triagem, name))
+                 for name, field in form.fields.items() if name.startswith('tr')]
+
+    if request.method == "POST":
+        revisado = request.POST.get("revisado") == "on"
+        comentario = request.POST.get("comentario", "")
+
+        # pega a instância real do psicólogo logado
+        psicologo = request.user.get_real_instance()
+
+        triagem.revisado = revisado
+        triagem.comentario_revisor = comentario
+        triagem.psicologo_revisor = psicologo
+        triagem.data_revisao = timezone.now()
+        triagem.save()
+
+        return redirect('analytics:pacient_detail', triagem.usuario.id)
+
+    context = {
+        "triagem": triagem,
+        "respostas": respostas
+    }
+    return render(request, "analytics/triagem_detail.html", context)
+

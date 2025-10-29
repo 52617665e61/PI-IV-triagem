@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Lista de Pacientes{% endblock %}
+
+{% block content %}
+<div class="backgroung">
+  <div class="container" style="padding: 40px; color: #fff;">
+
+    <h2 style="text-align: center; font-family: 'Jacques Francois', serif; margin-bottom: 30px;">
+      Lista de Pacientes
+    </h2>
+
+    {% if pacients %}
+    <table style="width: 100%; border-collapse: collapse; background-color: #d1cfcf; color: #000; border-radius: 10px; overflow: hidden;">
+      <thead style="background-color: #0a0345; color: #fff;">
+        <tr>
+          <th style="padding: 15px; text-align: left;">ID</th>
+          <th style="padding: 15px; text-align: left;">Nome Completo</th>
+          <th style="padding: 15px; text-align: left;">E-mail</th>
+          <th style="padding: 15px; text-align: center;">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pacient in pacients %}
+        <tr style="border-bottom: 1px solid #aaa;">
+          <td style="padding: 12px;">{{ pacient.id }}</td>
+          <td style="padding: 12px;">{{ pacient.first_name }} {{ pacient.last_name }}</td>
+          <td style="padding: 12px;">{{ pacient.email }}</td>
+          <td style="padding: 12px; text-align: center;">
+            <a href="{% url 'analytics:pacient_detail' pacient.id %}" class="nav-btn" style="background-color: #3a8a3c; color: white; text-decoration: none; font-size: 14px;">
+              Ver Detalhes
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p style="text-align: center; font-family: 'Jacques Francois', serif;">Nenhum paciente registrado.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
