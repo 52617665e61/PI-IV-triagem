@@ -82,7 +82,7 @@ def salvar_modelo(modelo, nome_arquivo):
 
 if __name__ == "__main__":
     CAMINHO_ARQUIVO = r'C:\Users\USER\Desktop\dataser_PI-IV\12888_2022_4048_MOESM3_ESM.xlsx'
-    MODELO_SAIDA = 'modelo_tdah.pkl'
+    MODELO_SAIDA = 'modelo_tdah2.pkl'
 
     df = carregar_dados(CAMINHO_ARQUIVO)
     X, y, features = preprocessar_dados(df)
